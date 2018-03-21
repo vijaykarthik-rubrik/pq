@@ -19,7 +19,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/lib/pq/oid"
+	"github.com/vijaykarthik-rubrik/pq/oid"
 )
 
 // Common error types
@@ -46,7 +46,7 @@ func (d *Driver) Open(name string) (driver.Conn, error) {
 }
 
 func init() {
-	sql.Register("postgres", &Driver{})
+	sql.Register("rk-postgres", &Driver{})
 }
 
 type parameterStatus struct {
