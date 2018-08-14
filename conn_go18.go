@@ -7,8 +7,6 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"fmt"
-	"io"
-	"io/ioutil"
 )
 
 // Implement the "QueryerContext" interface
@@ -98,31 +96,6 @@ func (cn *conn) watchCancel(ctx context.Context) func() {
 }
 
 func (cn *conn) cancel() error {
-	c, err := dial(cn.dialer, cn.opts)
-	if err != nil {
-		return err
-	}
-	defer c.Close()
-
-	{
-		can := conn{
-			c: c,
-		}
-		can.ssl(cn.opts)
-
-		w := can.writeBuf(0)
-		w.int32(80877102) // cancel request code
-		w.int32(cn.processID)
-		w.int32(cn.secretKey)
-
-		if err := can.sendStartupPacket(w); err != nil {
-			return err
-		}
-	}
-
-	// Read until EOF to ensure that the server received the cancel.
-	{
-		_, err := io.Copy(ioutil.Discard, c)
-		return err
-	}
+	cn.bad = true
+	return cn.Close()
 }
