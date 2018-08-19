@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/scaledata/pq/oid"
+	"github.com/lib/pq/oid"
 )
 
 func binaryEncode(parameterStatus *parameterStatus, x interface{}) []byte {

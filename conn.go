@@ -19,7 +19,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/scaledata/pq/oid"
+	"github.com/lib/pq/oid"
 )
 
 // Common error types

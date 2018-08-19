@@ -18,7 +18,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/scaledata/pq/oid"
+	"github.com/lib/pq/oid"
 )
 
 var (
